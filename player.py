@@ -1,19 +1,9 @@
-from game.shared.color import Color
-from game.shared.point import Point
+from color import Color
+from point import Point #This will cause problems, sence we never got a point.py program(point as in location on score) I will work on transfering the info from there to here
 
 
-class Actor:
-    """A visible, moveable thing that participates in the game. 
-    
-    The responsibility of Actor is to keep track of its appearance, position and velocity in 2d 
-    space.
-
-    Attributes:
-        _text (string): The text to display
-        _font_size (int): The font size to use.
-        _color (Color): The color of the text.
-        _position (Point): The screen coordinates.
-        _velocity (Point): The speed and direction.
+class Player:
+    """This object creates the player and gives the player various commands
     """
 
     def __init__(self):
@@ -21,8 +11,8 @@ class Actor:
         self._text = ""
         self._font_size = 15
         self._color = Color(255, 255, 255)
-        self._position = Point(0, 0)
-        self._velocity = Point(0, 0)
+        self._position = Point(0, 0) #Fix point
+        self._velocity = Point(0, 0) #Fix point
 
     def get_color(self):
         """Gets the actor's color as a tuple of three ints (r, g, b).
@@ -74,7 +64,7 @@ class Actor:
         """
         x = (self._position.get_x() + self._velocity.get_x()) % max_x
         y = (self._position.get_y() + self._velocity.get_y()) % max_y
-        self._position = Point(x, y)
+        self._position = Point(x, y) #Fix point
 
     def set_color(self, color):
         """Updates the color to the given one.
@@ -115,3 +105,6 @@ class Actor:
             velocity (Point): The given velocity.
         """
         self._velocity = velocity
+
+"""
+It will be easy enough to replace the point class info here."""
