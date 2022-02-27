@@ -17,7 +17,7 @@ class MovingObjects:
         _max_y = max_y
 
     
-    def Move_Objects(self, cast):
+    def Move_Objects(self):
         """
         Argument: max_y, get the position equal to the bottom of the screen.
         Uses the lists in cast to move objects down.
@@ -43,19 +43,19 @@ class MovingObjects:
             else:
                 cast.Set_Position(position) 
         """
-        gem_list = cast.get_actors("gem")
+        gem_list = self.cast.get_actors("gem")
         for gem in gem_list:
             gem.move_next(self, self._max_x, self._max_y)
             gem_location = gem.get_position()
             if gem_location > self._max_y:
-                cast.remove_actor("gem", gem)
+                self.cast.remove_actor("gem", gem)
         
-        rock_list = cast.get_actors("rock")
+        rock_list = self.cast.get_actors("rock")
         for rock in rock_list:
             rock.move_next(self, self._max_x, self._max_y)
             rock_location = rock.get_position()
             if rock_location > self._max_y:
-                cast.remove_actor("rock", gem)
+                self.cast.remove_actor("rock", gem)
         
     def Move_Player(self):
         """
