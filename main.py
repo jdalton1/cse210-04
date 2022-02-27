@@ -52,7 +52,7 @@ def main():
     y = int(MAX_Y / 2)
     position = Location(x, y)
 
-    robot = Player()
+    robot = cast._player
     robot.set_text("#")
     robot.set_font_size(FONT_SIZE)
     robot.set_color(WHITE)
