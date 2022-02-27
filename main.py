@@ -1,17 +1,19 @@
 import os
 import random
 
-from casting.actor import Actor
-from casting.artifact import Artifact
-from casting.cast import Cast
+# from player import Player
+from rocks import Rocks
+from gems import Gems
+from movingObjects import MovingObjects
+# from cast import Cast
 
-from directing.director import Director
+from director import Director
 
-from services.keyboard_service import KeyboardService
-from services.video_service import VideoService
+from keyboard import KeyboardService
+from display import VideoService
 
-from shared.color import Color
-from shared.point import Point
+from color import Color
+from location import Location
 
 
 FRAME_RATE = 12
@@ -37,13 +39,13 @@ def main():
     banner.set_text("")
     banner.set_font_size(FONT_SIZE)
     banner.set_color(WHITE)
-    banner.set_position(Point(CELL_SIZE, 0))
+    banner.set_position(Location(CELL_SIZE, 0))
     cast.add_actor("banners", banner)
     
     # create the robot
     x = int(MAX_X / 2)
     y = int(MAX_Y / 2)
-    position = Point(x, y)
+    position = Location(x, y)
 
     robot = Actor()
     robot.set_text("#")
@@ -63,7 +65,7 @@ def main():
 
         x = random.randint(1, COLS - 1)
         y = random.randint(1, ROWS - 1)
-        position = Point(x, y)
+        position = Location(x, y)
         position = position.scale(CELL_SIZE)
 
         r = random.randint(0, 255)
