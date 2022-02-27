@@ -1,3 +1,8 @@
+from location import Location
+from movingObjects import MovingObjects
+import random
+
+
 class Director:
     """A person who directs the game. 
     
@@ -8,7 +13,7 @@ class Director:
         _video_service (VideoService): For providing video output.
     """
 
-    def __init__(self, keyboard_service, video_service):
+    def __init__(self, keyboard_service, video_service, bottom_y):
         """Constructs a new Director using the specified keyboard and video services.
         
         Args:
@@ -17,6 +22,7 @@ class Director:
         """
         self._keyboard_service = keyboard_service
         self._video_service = video_service
+        self._bottom_y = bottom_y
         
     def start_game(self, cast):
         """Starts the game using the given cast. Runs the main game loop.
@@ -39,7 +45,12 @@ class Director:
         """
         robot = cast.get_first_actor("robots")
         velocity = self._keyboard_service.get_direction()
-        robot.set_velocity(velocity)        
+        robot.set_velocity(velocity) 
+
+        gems = cast.get_actors("gems")
+        for gem in gems:
+            velocity = Location(0,1)
+            gem.set_velocity(velocity)
 
     def _do_updates(self, cast):
         """Updates the robot's position and resolves any collisions with artifacts.
@@ -49,18 +60,42 @@ class Director:
         """
         banner = cast.get_first_actor("banners")
         robot = cast.get_first_actor("robots")
-        artifacts = cast.get_actors("artifacts")
+        gems = cast.get_actors("gems")
+        rocks = cast.get_actors("rocks")
 
         # banner.set_text("")
         max_x = self._video_service.get_width()
         max_y = self._video_service.get_height()
         robot.move_next(max_x, max_y)
+        for gem in gems:
+            speed = random.randint(2, 10)
+            velocity = Location(0, speed)
+            gem.set_velocity(velocity)
+            gem.move_next(max_x, max_y)
+            gem_position = gem._position
+            gem_y = gem_position.get_y
+            # if robot.get_position().equals(gem.get_position):
+            #     gem.remove_actor("gems", gem)
+
+        for rock in rocks:
+            speed = random.randint(2, 10)
+            velocity = Location(0, speed)
+            rock.set_velocity(velocity)
+            rock.move_next(max_x, max_y)
+            rock_position = rock._position
+            rock_y = rock_position.get_y
+            # if robot.get_position().equals(rock.get_position):
+            #     rock.remove_actor("rocks", rock)
+        # artifacts = MovingObjects
         
-        for artifact in artifacts:
-            if robot.get_position() == artifact.get_position():
-                # message = artifact.get_message()
-                # banner.set_text(message)    
-                pass
+        # artifacts.Move_Objects()
+
+
+        # for artifact in artifacts:
+        #     if robot.get_position() == artifact.get_position():
+        #         # message = artifact.get_message()
+        #         # banner.set_text(message)    
+        #         pass
         
     def _do_outputs(self, cast):
         """Draws the actors on the screen.

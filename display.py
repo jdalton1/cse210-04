@@ -39,6 +39,7 @@ class VideoService:
             actor (Actor): The actor to draw.
         """ 
         text = actor.get_text()
+        position = actor.get_position()
         x = actor.get_position().get_x()
         y = actor.get_position().get_y()
         font_size = actor.get_font_size()

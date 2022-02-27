@@ -1,6 +1,5 @@
 from color import Color
-#from point import Point #This will cause problems, sence we never got a point.py program(point as in location not score)
-
+from location import Location 
 
 class Player:
     """This object creates the player and gives the player various commands
@@ -11,8 +10,8 @@ class Player:
         self._text = ""
         self._font_size = 15
         self._color = Color(255, 255, 255)
-        self._position = [0, 0] #Fixed Point class
-        self._velocity = [0, 0] #Fixed Point class
+        self._position = Location(0, 0) #Fixed Point class
+        self._velocity = Location(0, 0) #Fixed Point class
 
     def get_color(self):
         """Gets the actor's color as a tuple of three ints (r, g, b).
@@ -64,7 +63,7 @@ class Player:
         """
         x = (self._position.get_x() + self._velocity.get_x()) % max_x
         y = (self._position.get_y() + self._velocity.get_y()) % max_y
-        self._position = [x, y] #Fixed Point class
+        self._position = Location(x, y)
 
     def set_color(self, color):
         """Updates the color to the given one.
