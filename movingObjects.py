@@ -9,12 +9,12 @@ class MovingObjects:
         No Arguments.
         Set up variables that don't need to be modified.
         Reterns nothing."""
-        _player_velocity = 2
-        cast = Cast()
-        _keyboard_service = keyboard
-        _player = Player()
-        _max_x = max_x
-        _max_y = max_y
+        self._player_velocity = 2
+        self.cast = Cast()
+        self._keyboard_service = keyboard
+        self._player = Player()
+        self._max_x = max_x
+        self._max_y = max_y
 
     
     def Move_Objects(self):

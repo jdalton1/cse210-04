@@ -6,7 +6,7 @@ from player import Player
 from rocks import Rocks
 from gems import Gems
 from movingObjects import MovingObjects
-# from cast import Cast
+from cast import Cast
 
 from director import Director
 
@@ -36,7 +36,8 @@ def main():
     director = Director(keyboard_service, video_service)
     
     # create the cast
-    cast = MovingObjects()
+    moving_objects = MovingObjects(keyboard_service, MAX_X, MAX_Y)
+    cast = moving_objects.cast
     
     # create the banner
     # banner = Actor()
@@ -63,17 +64,17 @@ def main():
     #     data = file.read()
     #     messages = data.splitlines()
     falling_objects = ["gems", "rocks"]
-    artifacts = []
+    # artifacts = []
     
     for n in range(DEFAULT_ARTIFACTS):
         falling_object = random.choice(falling_objects)
-        artifacts.append(falling_object)
+        # artifacts.append(falling_object)
            
         text = chr(random.randint(33, 126))
         # message = messages[n]
 
         x = random.randint(1, COLS - 1)
-        y = random.randint(1, ROWS - 1)
+        y = 1
         position = Location(x, y)
         position = position.scale(CELL_SIZE)
 
@@ -82,13 +83,13 @@ def main():
         b = random.randint(0, 255)
         color = Color(r, g, b)
         
-        artifact = MovingObjects()
-        artifact.set_text(text)
-        artifact.set_font_size(FONT_SIZE)
-        artifact.set_color(color)
-        artifact.set_position(position)
+        # artifact = MovingObjects()
+        # artifact.set_text(text)
+        # artifact.set_font_size(FONT_SIZE)
+        # artifact.set_color(color)
+        # artifact.set_position(position)
         # artifact.set_message(message)
-        cast.add_actor("artifacts", artifact)
+        cast.add_actor("artifacts", falling_object)    
     
     # start the game
 
