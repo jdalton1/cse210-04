@@ -1,5 +1,6 @@
+from re import L
 import pyray
-from shared.point import Point
+from location import Location
 
 
 class KeyboardService:
@@ -27,7 +28,7 @@ class KeyboardService:
             Point: The selected direction.
         """
         dx = 0
-        dy = 0
+    
 
         if pyray.is_key_down(pyray.KEY_LEFT):
             dx = -1
@@ -36,12 +37,12 @@ class KeyboardService:
             dx = 1
         
         if pyray.is_key_down(pyray.KEY_UP):
-            dy = -1
+            dx = 1
         
         if pyray.is_key_down(pyray.KEY_DOWN):
-            dy = 1
+            dx = -1
 
-        direction = Point(dx, dy)
+        direction = L(dx)
         direction = direction.scale(self._cell_size)
         
         return direction
