@@ -24,7 +24,7 @@ class Director:
         self._keyboard_service = keyboard_service
         self._video_service = video_service
         self._bottom_y = bottom_y
-        score = Points()
+        self.score = Points()
         
     def start_game(self, cast):
         """Starts the game using the given cast. Runs the main game loop.
@@ -61,7 +61,7 @@ class Director:
         gems = cast.get_actors("gems")
         rocks = cast.get_actors("rocks")
 
-        # banner.set_text("")
+        banner.set_text(self.score.points)
         max_x = self._video_service.get_width()
         max_y = self._video_service.get_height()
         robot.move_next(max_x, max_y)
@@ -73,8 +73,10 @@ class Director:
             gem.set_velocity(velocity)
             gem.move_next(max_x, max_y)
             gem_position = gem.get_position()
+    
 
             if gem_position == robot_position:
+                self.score.add_points(True)
                 cast.remove_actor("gems", gem)
 
         for rock in rocks:
@@ -85,10 +87,8 @@ class Director:
             rock_position = rock.get_position()
 
             if rock_position == robot_position:
-
-                stop_velosity = Location(0,0)
-                rock.set_velocity(stop_velosity)
-                rock.remove_actor("rocks", rock)
+                self.score.add_points(False)
+                cast.remove_actor("rocks", rock)
         # artifacts = MovingObjects
         
         # artifacts.Move_Objects()
