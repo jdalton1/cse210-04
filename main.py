@@ -1,6 +1,5 @@
 import os
 import random
-from re import L
 from player import Player
 
 # from player import Player
@@ -29,7 +28,7 @@ ROWS = 40
 CAPTION = "Greed"
 DATA_PATH = os.path.dirname(os.path.abspath(__file__)) + "/data/messages.txt"
 WHITE = Color(255, 255, 255)
-DEFAULT_ARTIFACTS = 40
+DEFAULT_ARTIFACTS = 2
 
 def main():
     keyboard_service = KeyboardService(CELL_SIZE)
@@ -73,16 +72,16 @@ def main():
 
         falling_object = random.choice(falling_objects)
         if falling_object == "gems":
-            velocity = Location(0, 10)
-            artifact = Gems(position, velocity)
+            velocity = Location(0, 0)
+            artifact = Gems()
             symbol = "*"
             text = "gems"
 
 
 
         else:
-            velocity = Location(0, 1)
-            artifact = Rocks(position, velocity)
+            velocity = Location(0, 0)
+            artifact = Rocks()
             symbol = "o"
             text = "rocks"
         
