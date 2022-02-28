@@ -1,25 +1,29 @@
 from cast import Cast
+from location import Location
 from player import Player
 """
 This class needs to control movment for every object in the game"""
 
 class MovingObjects:
-    def __init__(self, keyboard):
+    def __init__(self, keyboard, max_x, max_y):
         """
         No Arguments.
         Set up variables that don't need to be modified.
         Reterns nothing."""
-        _player_velocity = 2
-        cast = Cast()
-        _keyboard_service = keyboard
-        _player = Player()
+        self._player_velocity = 2
+        self.cast = Cast()
+        self._keyboard_service = keyboard
+        self._player = Player()
+        self._max_x = max_x
+        self._max_y = max_y
 
     
-    def Move_Objects(self, cast, max_y):
+    def Move_Objects(self):
         """
         Argument: max_y, get the position equal to the bottom of the screen.
         Uses the lists in cast to move objects down.
         Returns nothing."""
+        """
         gem_list = cast.get_actors("gem")   #Get actors by group so code in line 29 can work properly. This is for the gem group
         for gem in gem_list: #loop through the list of classes and move them down accoridng to thier velocity
             velocity = gem.Get_Velocity() #Allows objects to have diffrent velocity just like the example shown by the teacher
@@ -39,15 +43,50 @@ class MovingObjects:
                 cast.remove_actor("rock", rock) 
             else:
                 cast.Set_Position(position) 
-        
-        
-    def Move_Player(self):
         """
-        No Argument
-        Sets the player volocity based on keyboard action/
-        Reterns nothing"""
-        velocity = self._keyboard_service.get_direction() #I found it would be just easier for the player object to move itself and just modify the velocity here
-        self._player.set_velocity(velocity) 
+        # gem_list = self.cast.get_actors("gems")
+        # for gem in gem_list:
+        #     gem._velocity = Location(0, 2)
+        #     gem.move_next(self, self._max_x, self._max_y)
+        #     gem_location = gem.get_position()
+        #     if gem_location > self._max_y:
+        #         self.cast.remove_actor("gem", gem)
+        
+        # rock_list = self.cast.get_actors("rocks")
+        # for rock in rock_list:
+        #     rock._velocity = Location(0, 2)
+        #     rock.move_next(self, self._max_x, self._max_y)
+        #     rock_location = rock.get_position()
+        #     if rock_location > self._max_y:
+        #         self.cast.remove_actor("rocks", rock)
+    
+    # def move_rocks(self):
+    #     rock_list = self.cast.get_actors("rocks")
+    #     for rock in rock_list:
+    #         rock._velocity = Location(0, 2)
+    #         rock.move_next(self, self._max_x, self._max_y)
+    #         rock_location = rock.get_position()
+    #         if rock_location > self._max_y:
+    #             self.cast.remove_actor("rocks", rock)
+    
+    # def move_gems(self):
+    #     gem_list = self.cast.get_actors("gems")
+    #     for gem in gem_list:
+    #         gem._velocity = Location(0, 2)
+    #         gem.move_next(self, self._max_x, self._max_y)
+    #         gem_location = gem.get_position()
+    #         if gem_location > self._max_y:
+    #             self.cast.remove_actor("gems", gem)
+                
+        
+    # def Move_Player(self):
+    #     """
+    #     No Argument
+    #     Sets the player volocity based on keyboard action/
+    #     Reterns nothing"""
+    #     velocity = self._keyboard_service.get_direction() #I found it would be just easier for the player object to move itself and just modify the velocity here
+    #     self._player.set_velocity(velocity) 
+    #     self._player.move_next(self, self._max_x, self._max_y)
         
 
 """

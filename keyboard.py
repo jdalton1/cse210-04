@@ -42,7 +42,7 @@ class KeyboardService:
         if pyray.is_key_down(pyray.KEY_DOWN):
             dx = -1
 
-        direction = L(dx)
+        direction = Location(dx, 0)
         direction = direction.scale(self._cell_size)
         
         return direction
